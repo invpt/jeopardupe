@@ -1,0 +1,19 @@
+.JeopardyCard {
+    all: unset;
+    cursor: pointer;
+
+    height: 100px;
+    border-radius: 20px;
+    background-color: rgb(34, 74, 255);
+    color: gold;
+    font-size: 70px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.JeopardyCard.Done {
+    background-color: rgb(19, 38, 122);
+    color: rgb(163, 160, 141);
+}
