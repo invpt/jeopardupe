@@ -260,7 +260,7 @@ const finalCategory: QuestionCategoryModel = {
   questions: [
     {
       points: 0,
-      question: "FINAL JEOPARDY!!\n\This is pseudocode for an algorithm that can sort a list of 6 integers. The goal is to provide code that I can translate into Python and run.",
+      question: "FINAL JEOPARDY!! This is pseudocode for an algorithm that can sort a list of 6 integers. The goal is to provide code that I can translate into Python and run.",
       answer: "Let's see!",
     },
   ],
