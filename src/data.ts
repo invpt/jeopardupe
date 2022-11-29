@@ -10,6 +10,7 @@ export type QuestionModel = {
   question: string,
   questionCode?: string | undefined | null,
   answer: string,
+  answerCode?: string | undefined  | null,
 };
 
 export type TeamModel = {
