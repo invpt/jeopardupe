@@ -23,7 +23,7 @@ const Teams: Component<{
             />
         }</Index>
         <button class={styles.AddTeam} onClick={() => setTeams([...teams(), { name: "", points: 0 }])}>
-            + Add Team
+            +
         </button>
     </div>;
 }

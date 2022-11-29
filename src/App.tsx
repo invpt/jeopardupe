@@ -1,4 +1,4 @@
-import type { Component, JSX } from 'solid-js';
+import { Component, createEffect, JSX } from 'solid-js';
 
 import { createSignal, For } from 'solid-js';
 import styles from './App.module.css';
@@ -267,13 +267,30 @@ const finalCategory: QuestionCategoryModel = {
 };
 
 const App: Component = () => {
-  const teamsSignal = createSignal<TeamModel[]>([]);
-  const [doneQuestions, setDoneQuestions] = createSignal<string[]>([]);
+  const teamsJson = window.localStorage.getItem("teams");
+  const doneQuestionsJson = window.localStorage.getItem("doneQuestions");
+  let teamsInit: TeamModel[] = [];
+  if (teamsJson != null) {
+    teamsInit = JSON.parse(teamsJson) as TeamModel[];
+  }
+  let doneQuestionsInit: string[] = [];
+  if (doneQuestionsJson != null) {
+    doneQuestionsInit = JSON.parse(doneQuestionsJson) as string[];
+  }
+
+  const teamsSignal = createSignal(teamsInit);
+  const [teams, setTeams] = teamsSignal;
+  const [doneQuestions, setDoneQuestions] = createSignal(doneQuestionsInit);
   const [currentCQ, setCurrentCQ] = createSignal<{category: QuestionCategoryModel, question: QuestionModel} | undefined>();
   const [answerShown, setAnswerShown] = createSignal(false);
   const [done, setDone] = createSignal(false);
 
-  return (
+  createEffect(() => {
+    window.localStorage.setItem("teams", JSON.stringify(teams()));
+    window.localStorage.setItem("doneQuestions", JSON.stringify(doneQuestions()));
+  });
+
+  return <div class={styles.Wrapper}>
     <main>
       {currentCQ() == null
         ? <div>
@@ -288,7 +305,7 @@ const App: Component = () => {
                 <For each={category.questions}>{(question, index) =>
                   <JeopardyCard
                     question={question}
-                    done={doneQuestions().indexOf(category.name + index()) != -1}
+                    done={() => doneQuestions().indexOf(category.name + index()) != -1}
                     onClick={() => setCurrentCQ({category: category, question: question})}
                   />
                 }</For>
@@ -321,13 +338,30 @@ const App: Component = () => {
             : <button class={styles.ShowAnswer} onClick={() => setAnswerShown(true)}>Show Answer</button>}
         </div>
       }
-      <Teams
-        teamsSignal={teamsSignal}
-        currentCQ={currentCQ}
-        answerShown={answerShown}
-      />
     </main>
-  );
+    <button class={styles.ResetButton} onClick={() => {
+      if (!confirm("Are you sure you want to reset the board?"))
+        return;
+
+      if (!confirm("Are you REALLY sure you want to reset the board?"))
+        return;
+
+      if (!confirm("Resetting the board."))
+        return;
+
+      setTeams([]);
+      setDoneQuestions([]);
+      setCurrentCQ(undefined);
+      setAnswerShown(false);
+    }}>
+      RESET
+    </button>
+    <Teams
+      teamsSignal={teamsSignal}
+      currentCQ={currentCQ}
+      answerShown={answerShown}
+    />
+  </div>;
 };
 
 export default App;
