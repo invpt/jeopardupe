@@ -3,6 +3,8 @@ import type { Component, Accessor, Signal } from 'solid-js';
 import { createSignal, createEffect, For, Index } from 'solid-js';
 import { CQ, TeamModel } from './data';
 
+import xSvg from './assets/x.svg';
+
 import styles from './Teams.module.css';
 
 const Teams: Component<{
@@ -69,7 +71,7 @@ const Team: Component<{
                 }}>Right</button>
             </div>
         </div>
-        <button class={styles.RemoveTeam} onClick={remove}><img src="/src/assets/x.svg" width={20} height={20} title="Delete Team" /></button>
+        <button class={styles.RemoveTeam} onClick={remove}><img src={xSvg} width={20} height={20} title="Delete Team" /></button>
     </div>;
 }
 
