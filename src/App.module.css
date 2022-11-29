@@ -78,6 +78,7 @@ main {
 
 .CodeQuestion {
   max-width: 1200px;
+  overflow: auto;
   font-size: 40px;
   color: white;
   padding: 30px;
