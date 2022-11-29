@@ -9,7 +9,7 @@ const JeopardyCard : Component<{
     onClick: () => void
 }> = ({ question, done, onClick }) => {
     return <button class={styles.JeopardyCard} classList={{ [styles.Done]: done }} onClick={onClick}>
-        {question.points}
+        ${question.points}
     </button>;
 }
 

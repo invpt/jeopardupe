@@ -22,7 +22,7 @@ const Teams: Component<{
                 qPoints={() => currentCQ()?.question.points}
             />
         }</Index>
-        <button class={styles.AddTeam} onClick={() => setTeams([...teams(), { name: "New Team", points: 0 }])}>
+        <button class={styles.AddTeam} onClick={() => setTeams([...teams(), { name: "", points: 0 }])}>
             + Add Team
         </button>
     </div>;
@@ -40,34 +40,36 @@ const Team: Component<{
     }
 
     function onScoreChange(event: Event & { currentTarget: HTMLInputElement, target: Element }) {
-        if (event.currentTarget.value.trim() !== "" && !Number.isNaN(+event.currentTarget.value))
-            setTeam({...team(), points: +event.currentTarget.value})
+        const filtered = event.currentTarget.value.trim().replace("$", "");
+        if (filtered !== "" && !Number.isNaN(+filtered))
+            setTeam({...team(), points: +filtered})
     }
 
-    return <div class={styles.Team}>
-        <label for={`team-${index}-name`}>Team Name <button class={styles.RemoveTeam} onClick={remove}>X</button></label>
-        <input type="text" name="team-name" placeholder="Team Name" id={`team-${index}-name`} value={team().name} onInput={onNameChange} />
-        <label for={`team-${index}-score`}>Team Score</label>
-        <input type="text" name="team-score" placeholder="Team Score" id={`team-${index}-score`} value={team().points} onInput={onScoreChange} />
-        <div class={styles.AnswerButtons}>
-            <button class={styles.WrongButton} onClick={() => {
-                if (qPoints() == null) return;
+    return <div class={styles.TeamWrapper}>
+        <div class={styles.Team}>
+            <div class={styles.Score}><input type="text" name="team-score" placeholder="Score" id={`team-${index}-score`} value={"$" + team().points} onInput={onScoreChange} /></div>
+            <input type="text" name="team-name" placeholder="Team Name" id={`team-${index}-name`} value={team().name} onInput={onNameChange} />
+            <div class={styles.AnswerButtons}>
+                <button class={styles.WrongButton} onClick={() => {
+                    if (qPoints() == null) return;
 
-                setTeam({
-                    ...team(),
-                    points: team().points - qPoints()!,
-                })
-            }}>Wrong</button>
-            <button class={styles.RightButton} onClick={() => {
-                console.log(qPoints())
-                if (qPoints() == null) return;
+                    setTeam({
+                        ...team(),
+                        points: team().points - qPoints()!,
+                    })
+                }}>Wrong</button>
+                <button class={styles.RightButton} onClick={() => {
+                    console.log(qPoints())
+                    if (qPoints() == null) return;
 
-                setTeam({
-                    ...team(),
-                    points: team().points + qPoints()!,
-                })
-            }}>Right</button>
+                    setTeam({
+                        ...team(),
+                        points: team().points + qPoints()!,
+                    })
+                }}>Right</button>
+            </div>
         </div>
+        <button class={styles.RemoveTeam} onClick={remove}><img src="/src/assets/x.svg" width={20} height={20} title="Delete Team" /></button>
     </div>;
 }
 

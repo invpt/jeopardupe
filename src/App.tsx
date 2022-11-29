@@ -105,7 +105,7 @@ const questions: QuestionCategoryModel[] = [
     ],
   },
   {
-    name: "Algo-rithms",
+    name: "Algorithms",
     questions: [
       {
         points: 100,
