@@ -343,9 +343,6 @@ const App: Component = () => {
       if (!confirm("Are you sure you want to reset the board?"))
         return;
 
-      if (!confirm("Are you REALLY sure you want to reset the board?"))
-        return;
-
       if (!confirm("Resetting the board."))
         return;
 
