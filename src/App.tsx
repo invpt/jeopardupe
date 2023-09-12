@@ -28,6 +28,158 @@ const Answer: Component<{ answer: string, code?: string | undefined | null }> = 
 
 const questions: QuestionCategoryModel[] = [
   {
+    "name": "Programming Languages",
+    "questions": [
+      {
+        "points": 200,
+        "question": "This language, invented by Guido van Rossum, is often used for web development and data analysis.",
+        "answer": "What is Python?"
+      },
+      {
+        "points": 400,
+        "question": "This language, created by James Gosling at Sun Microsystems, is object-oriented and platform-independent.",
+        "answer": "What is Java?"
+      },
+      {
+        "points": 600,
+        "question": "This language, designed by Brendan Eich, is most commonly used for client-side web development.",
+        "answer": "What is JavaScript?"
+      },
+      {
+        "points": 800,
+        "question": "This programming language, first appearing in 1972, is known for its efficiency and is often used for system programming.",
+        "answer": "What is C?"
+      },
+      {
+        "points": 1000,
+        "question": "This functional language, which has roots in academia, is used in sectors like finance and has a mascot named Conrad.",
+        "answer": "What is Haskell?"
+      }
+    ]
+  },
+  {
+    "name": "Data Structures",
+    "questions": [
+      {
+        "points": 200,
+        "question": "This data structure operates on a Last-In, First-Out (LIFO) principle.",
+        "answer": "What is a Stack?"
+      },
+      {
+        "points": 400,
+        "question": "This tree-based data structure maintains a sorted order of its elements.",
+        "answer": "What is a Binary Search Tree (BST)?"
+      },
+      {
+        "points": 600,
+        "question": "In this data structure, each element points to both a 'next' and 'previous' element.",
+        "answer": "What is a Doubly Linked List?"
+      },
+      {
+        "points": 800,
+        "question": "This data structure can have a worst case search, insert, and delete time complexity of O(1).",
+        "answer": "What is a Hash Table (or Hash Map)?"
+      },
+      {
+        "points": 1000,
+        "question": "This non-linear data structure represents hierarchical data and is used in applications such as network routing and abstract syntax trees.",
+        "answer": "What is a Tree?"
+      }
+    ]
+  },
+  {
+    "name": "Algorithms",
+    "questions": [
+      {
+        "points": 200,
+        "question": "This sorting algorithm works by repeatedly swapping adjacent elements if they are in the wrong order.",
+        "answer": "What is Bubble Sort?"
+      },
+      {
+        "points": 400,
+        "question": "This divide-and-conquer algorithm works by partitioning an array into smaller sub-arrays.",
+        "answer": "What is QuickSort?"
+      },
+      {
+        "points": 600,
+        "question": "This algorithm is used to find the shortest path between nodes in a graph.",
+        "answer": "What is Dijkstra's Algorithm?"
+      },
+      {
+        "points": 800,
+        "question": "This technique stores solutions of overlapping subproblems to improve computational efficiency.",
+        "answer": "What is Dynamic Programming?"
+      },
+      {
+        "points": 1000,
+        "question": "This algorithm is used to determine the single-source shortest paths in a graph with negative weight edges but no negative weight cycles.",
+        "answer": "What is Bellman-Ford Algorithm?"
+      }
+    ]
+  },
+  {
+    "name": "Operating Systems",
+    "questions": [
+      {
+        "points": 200,
+        "question": "This family of operating systems is derived from the Unix operating system.",
+        "answer": "What is Linux?"
+      },
+      {
+        "points": 400,
+        "question": "This scheduling algorithm assigns CPU to the process with the smallest next CPU burst.",
+        "answer": "What is Shortest Job First (SJF)?"
+      },
+      {
+        "points": 600,
+        "question": "This mechanism allows operating systems to run multiple processes concurrently, sharing a single CPU.",
+        "answer": "What is Multitasking?"
+      },
+      {
+        "points": 800,
+        "question": "This is a technique that allows a computer to run a program that requires more memory space than is physically available.",
+        "answer": "What is Virtual Memory?"
+      },
+      {
+        "points": 1000,
+        "question": "This policy replaces the page that will not be used for the longest time in the future.",
+        "answer": "What is Optimal Page Replacement?"
+      }
+    ]
+  },
+  {
+    "name": "Computer Architecture",
+    "questions": [
+      {
+        "points": 200,
+        "question": "This is the primary storage area for instructions to be executed by the CPU.",
+        "answer": "What is the main memory or RAM?"
+      },
+      {
+        "points": 400,
+        "question": "In a CPU, this component performs arithmetic and logical operations.",
+        "answer": "What is the Arithmetic Logic Unit (ALU)?"
+      },
+      {
+        "points": 600,
+        "question": "This type of CPU architecture uses a pipeline to allow more than one instruction to be executed at any given time.",
+        "answer": "What is Superscalar architecture?"
+      },
+      {
+        "points": 800,
+        "question": "This is a collection of wires through which data is transmitted from one part of a computer to another.",
+        "answer": "What is a Bus?"
+      },
+      {
+        "points": 1000,
+        "question": "This component of the CPU provides timing and control signals for the operations of all other units.",
+        "answer": "What is the Control Unit?"
+      }
+    ]
+  }
+]
+/*[
+  {
     name: "Edge Cases",
     questions: [
       {
@@ -253,15 +405,15 @@ return false;`,
       },
     ],
   },
-];
+];*/
 
 const finalCategory: QuestionCategoryModel = {
   name: "Final Jeopardy",
   questions: [
     {
-      points: 0,
-      question: "FINAL JEOPARDY!! This is pseudocode for an algorithm that can sort a list of 6 integers. The goal is to provide code that I can translate into Python and run.",
-      answer: "Let's see!",
+      points: 1000,
+      question: "Derived from Latin for 'few' and often used in optimization problems, this algorithmic technique builds a solution piece by piece, making choices that offer the most immediate benefit. It's known to provide local optima but not necessarily a global optimum.",
+      answer: "What is a Greedy Algorithm?",
     },
   ],
 };
@@ -326,6 +478,7 @@ const App: Component = () => {
               setAnswerShown(false);
 
               if (doneQuestions().length == questions.map(cat => cat.questions.map(q => 1).reduce((a, b) => a + b)).reduce((a, b) => a + b) && !done()) {
+                alert("Final Jeopardy!")
                 // final jeopardy!!
                 setCurrentCQ({
                   category: finalCategory,
